@@ -1,6 +1,8 @@
-Will be deleted and replaced by https://github.com/EloiStree/2024_08_27_UnityInputHidStringIdHub
 
----------
+# Unity Input Path HID
 
-# 2023_07_16_UnityInputHIDRead
-This package allows you to recover the HID value of device in Unity and convert them to boolean event.
+This package allows you to retrieve the HID value of a device in Unity and convert it into boolean events.
+
+Note: Unity messed up the Input System in December 2025, breaking my workshop and my project.
+So I went back to the old code and started reading input paths directly until it’s fixed:
+[https://discussions.unity.com/t/inputactionreference-not-saved-on-prefab/1699980/16](https://discussions.unity.com/t/inputactionreference-not-saved-on-prefab/1699980/16)
