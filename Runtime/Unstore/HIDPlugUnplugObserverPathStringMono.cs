@@ -1,5 +1,6 @@
 
 using Eloi;
+using Eloi.HID;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;

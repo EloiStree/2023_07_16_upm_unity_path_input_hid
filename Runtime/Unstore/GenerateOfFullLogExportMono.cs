@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GenerateOfFullLogExportMono : MonoBehaviour
 {
 
     public ListOfAllDeviceAsIdBoolFloatMono m_devicesSource;
 
-    public Eloi.PrimitiveUnityEvent_String m_onLogEmitted;
+    public UnityEvent<string> m_onLogEmitted;
 
 
     [ContextMenu("Produce Full Log")]
@@ -16,7 +17,7 @@ public class GenerateOfFullLogExportMono : MonoBehaviour
     {
         if (m_devicesSource == null)
         {
-            Eloi.E_SearchInSceneUtility.TryToFetchWithActiveInScene(ref m_devicesSource);
+            m_devicesSource = FindObjectOfType<ListOfAllDeviceAsIdBoolFloatMono>();
         }
         if (m_devicesSource == null)
         {

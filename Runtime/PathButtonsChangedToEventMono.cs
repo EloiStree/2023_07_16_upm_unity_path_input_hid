@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-
 public class PathButtonsChangedToEventMono : MonoBehaviour, I_IN_HIDButtonChangedReference
 {
 
@@ -18,7 +17,7 @@ public class PathButtonsChangedToEventMono : MonoBehaviour, I_IN_HIDButtonChange
         public class TargetButtonInDevice
         {
             public string m_buttonName="button1";
-            public Eloi.PrimitiveUnityEvent_Bool m_onChanged;
+            public PrimitiveUnityEventExtra_Bool m_onChanged;
         }
     }
 

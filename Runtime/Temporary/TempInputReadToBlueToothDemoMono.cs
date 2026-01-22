@@ -3,6 +3,101 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.Events;
+
+[System.Serializable]
+public abstract class BooleanChangeListener
+{
+    [SerializeField] BooleanChangeObserver m_observer = new BooleanChangeObserver();
+
+    public void SetBoolean(in bool value)
+    {
+        SetBoolean(in value, out bool tmp);
+    }
+    public void SetBoolean(in bool value, out bool changed)
+    {
+        m_observer.SetBoolean(in value, out changed);
+        if (changed)
+        {
+            NotifyChangeToChildren(value);
+        }
+    }
+    protected abstract void NotifyChangeToChildren(bool newValue);
+
+    public void GetBoolean(out bool value) => m_observer.GetBoolean(out value);
+    public bool GetBoolean()
+    {
+        return m_observer.GetBoolean();
+    }
+
+}
+
+
+[System.Serializable]
+public class DefaultBooleanChangeListener : BooleanChangeListener
+{
+    public UnityEvent<bool> m_onChanged;
+    public BooleanChanged m_onChangedDelegate;
+    public delegate void BooleanChanged(bool newValue);
+    protected override void NotifyChangeToChildren(bool newValue)
+    {
+        m_onChanged.Invoke(newValue);
+        if (m_onChangedDelegate != null)
+            m_onChangedDelegate(newValue);
+    }
+}
+[System.Serializable]
+public class DefaultOnOffBooleanChangeListener : BooleanChangeListener
+{
+    public UnityEvent<bool> m_onChanged;
+    public BooleanChanged m_onChangedDelegate;
+    public UnityEvent m_onChangedTrue;
+    public UnityEvent m_onChangedFalse;
+    public delegate void BooleanChanged(bool newValue);
+    protected override void NotifyChangeToChildren(bool newValue)
+    {
+        m_onChanged.Invoke(newValue);
+        if (m_onChangedDelegate != null)
+            m_onChangedDelegate(newValue);
+        if (newValue)
+            m_onChangedTrue.Invoke();
+        else
+            m_onChangedFalse.Invoke();
+    }
+}
+[System.Serializable]
+public class DelegateChangeListener : BooleanChangeListener
+{
+    BooleanChanged m_onChangedDelegate;
+    public delegate void BooleanChanged(bool newValue);
+    protected override void NotifyChangeToChildren(bool newValue)
+    {
+        if (m_onChangedDelegate != null)
+            m_onChangedDelegate(newValue);
+    }
+    public void AddListener(BooleanChanged listener) { m_onChangedDelegate += listener; }
+    public void RemoveListener(BooleanChanged listener) { m_onChangedDelegate -= listener; }
+}
+
+[System.Serializable]
+public class BooleanChangeObserver
+{
+
+    [SerializeField] bool m_booleanState;
+    public void SetBoolean(in bool value, out bool changed)
+    {
+        changed = value != m_booleanState;
+        m_booleanState = value;
+    }
+    public void GetBoolean(out bool value) => value = m_booleanState;
+    public bool GetBoolean()
+    {
+        return m_booleanState;
+    }
+}
+
+
+
 public class TempInputReadToBlueToothDemoMono : MonoBehaviour
 {
 
@@ -138,9 +233,9 @@ public string m_idLeftStickY ="/XboxOneGamepadAndroid|>leftStick y";
         }
 
     }
-
-    public Eloi.PrimitiveUnityEvent_String m_onXboxCommandBoolean;
-    public Eloi.PrimitiveUnityEvent_String m_onXboxCommandAxis;
+     
+    public UnityEvent<string> m_onXboxCommandBoolean;
+    public UnityEvent<string> m_onXboxCommandAxis;
     public void NotifyButtonChanged(HIDButtonChangedReference buttonChanged)
     {
         if (!this.isActiveAndEnabled) return;
@@ -168,7 +263,7 @@ public string m_idLeftStickY ="/XboxOneGamepadAndroid|>leftStick y";
 
     private bool CheckAndPushIfFound(HIDButtonChangedReference buttonChanged, string id, string press, string release)
     {
-        bool isFound = Eloi.E_StringUtility.AreEquals( buttonChanged.m_uniqueId, id, true, true);
+        bool isFound = E_StringUtility.AreEquals( buttonChanged.m_uniqueId, id, true, true);
         //Debug.Log("TestC " + buttonChanged.m_uniqueId + " " + id +" #"+isFound);
         if (isFound) {
 
@@ -180,4 +275,24 @@ public string m_idLeftStickY ="/XboxOneGamepadAndroid|>leftStick y";
         return isFound;
     }
 
+}
+
+public class E_StringUtility
+{
+    public static bool AreEquals(string a, string b, bool ignoreCase, bool ignoreWhiteSpace)
+    {
+        if (ignoreWhiteSpace)
+        {
+            a = a.Trim();
+            b = b.Trim();
+        }
+        if (ignoreCase)
+        {
+            return string.Equals(a, b, StringComparison.OrdinalIgnoreCase);
+        }
+        else
+        {
+            return string.Equals(a, b, StringComparison.Ordinal);
+        }
+    }
 }

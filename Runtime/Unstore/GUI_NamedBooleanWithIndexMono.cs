@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GUI_NamedBooleanWithIndexMono : MonoBehaviour
 {
@@ -12,10 +13,10 @@ public class GUI_NamedBooleanWithIndexMono : MonoBehaviour
     public bool m_isDisplay;
     
 
-    public Eloi.PrimitiveUnityEvent_Int m_onIndex;
-    public Eloi.PrimitiveUnityEvent_String m_onLabel;
-    public Eloi.PrimitiveUnityEventExtra_Bool m_onIsTrue;
-    public Eloi.PrimitiveUnityEvent_Bool m_onDisplay;
+    public UnityEvent<int> m_onIndex;
+    public UnityEvent<string> m_onLabel;
+    public PrimitiveUnityEventExtra_Bool m_onIsTrue;
+    public UnityEvent<bool> m_onDisplay;
     // Start is called before the first frame update
 
     public void Set(int index, string label, bool isTrue) {
@@ -41,5 +42,22 @@ public class GUI_NamedBooleanWithIndexMono : MonoBehaviour
     public void Clear()
     {
         Set(0, "", false);
+    }
+}
+[System.Serializable]
+public class PrimitiveUnityEventExtra_Bool
+{
+
+    public UnityEvent<bool> m_valueEvent;
+    public UnityEvent m_onEvent;
+    public UnityEvent m_offEvent;
+
+    public void Invoke(bool value)
+    {
+        m_valueEvent.Invoke(value);
+        if (value)
+            m_onEvent.Invoke();
+        else
+            m_offEvent.Invoke();
     }
 }

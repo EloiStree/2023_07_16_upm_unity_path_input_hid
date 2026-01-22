@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 
 public class PathAxisChangedToEventMono : MonoBehaviour
@@ -20,7 +21,7 @@ public class PathAxisChangedToEventMono : MonoBehaviour
             public string m_axisName = "stick x";
             public float m_betweenLimitA;
             public float m_betweenLimitB;
-            public Eloi.PrimitiveUnityEvent_Bool m_onInLimitChanged;
+            public UnityEvent<bool> m_onInLimitChanged;
             public float m_current;
             public float m_previous;
             public bool m_inLimit;

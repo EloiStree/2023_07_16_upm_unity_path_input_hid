@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GUI_NamedAxisWithIndexMono : MonoBehaviour
 {
@@ -10,10 +11,10 @@ public class GUI_NamedAxisWithIndexMono : MonoBehaviour
     public float m_axisValue;
     public bool m_isDisplay;
 
-    public Eloi.PrimitiveUnityEvent_Int m_onIndex;
-    public Eloi.PrimitiveUnityEvent_String m_onLabel;
-    public Eloi.PrimitiveUnityEvent_Float m_onAxisValue;
-    public Eloi.PrimitiveUnityEvent_Bool m_onDisplay;
+    public UnityEvent<int> m_onIndex;
+    public UnityEvent<string> m_onLabel;
+    public UnityEvent<float> m_onAxisValue;
+    public UnityEvent<bool> m_onDisplay;
     // Start is called before the first frame update
 
     public void Set(int index, string label, float axisValue)

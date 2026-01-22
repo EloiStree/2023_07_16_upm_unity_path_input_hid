@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Eloi.HID;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -81,6 +82,6 @@ public class HIDObserverOverwatchChangeToBooleanEventMono : MonoBehaviour
         }
     }
     [System.Serializable]
-    public class History: Eloi.GenericClampHistory<NamedBoolean>{}
+    public class History: GenericClampHistory<NamedBoolean>{}
     public History m_history;
 }

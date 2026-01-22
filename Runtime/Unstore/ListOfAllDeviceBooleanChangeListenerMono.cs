@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Eloi.HID;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -33,10 +34,10 @@ public class ListOfAllDeviceBooleanChangeListenerMono : MonoBehaviour
 
     public List<string> m_buttonUniqueId = new List<string>();
 
-    //public History m_history= new History();
+    public History m_history = new History();
 
     [System.Serializable]
-    public class History : Eloi.GenericClampHistory<LastReceivedBoolChange> { }
+    public class History : GenericClampHistory<LastReceivedBoolChange> { }
 
     private void Awake()
     {

@@ -4,26 +4,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
-
+using UnityEngine.Events;
 public class GUI_RawInputDeviceEventMono : MonoBehaviour
 {
 
     public DeviceSourceToRawValue m_deviceSourceRawValue;
 
-    public Eloi.PrimitiveUnityEvent_String m_onDisplayName;
-    public Eloi.PrimitiveUnityEvent_String m_onProductName;
-    public Eloi.PrimitiveUnityEvent_String m_onManifacturer;
-    public Eloi.PrimitiveUnityEvent_String m_onInterfaceName;
-    public Eloi.PrimitiveUnityEvent_String m_onCapacbilities;
-    public Eloi.PrimitiveUnityEvent_String m_onDevicePath;
-    public Eloi.PrimitiveUnityEvent_Int    m_onDeviceButtonCount;
-    public Eloi.PrimitiveUnityEvent_Int    m_onDeviceAxisCount;
+    public UnityEvent<string> m_onDisplayName;
+    public UnityEvent<string> m_onProductName;
+    public UnityEvent<string> m_onManifacturer;
+    public UnityEvent<string> m_onInterfaceName;
+    public UnityEvent<string> m_onCapacbilities;
+    public UnityEvent<string> m_onDevicePath;
+    public UnityEvent<int>    m_onDeviceButtonCount;
+    public UnityEvent<int> m_onDeviceAxisCount;
 
     public GUI_NamedBooleanWithIndexMono [] m_booleanGUI;
     public GUI_NamedAxisWithIndexMono [] m_axisGUI;
     public bool m_useJsonCapacityInLog=true;
-    public Eloi.PrimitiveUnityEvent_String m_onCreateClipboardDebugger;
-    public Eloi.PrimitiveUnityEvent_String m_onCreateLocalFileDebugger;
+    public UnityEvent<string> m_onCreateClipboardDebugger;
+    public UnityEvent<string> m_onCreateLocalFileDebugger;
 
 
 

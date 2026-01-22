@@ -9,7 +9,7 @@ public class HIDXRDetectorMono : MonoBehaviour
 {
     public string[] m_pathOfVRApp = new string[] { "/HeadTrackingOpenXR" };
     public bool m_isInXRApp;
-    public Eloi.PrimitiveUnityEventExtra_Bool m_onIsXRApp;
+    public PrimitiveUnityEventExtra_Bool m_onIsXRApp;
     public string[] test;
 
 
