@@ -4,10 +4,11 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.Events;
 
+
 public class GenerateOfFullLogExportMono : MonoBehaviour
 {
 
-    public ListOfAllDeviceAsIdBoolFloatMono m_devicesSource;
+    public HidMono_ListenToAllDevicesInUnity m_devicesSource;
 
     public UnityEvent<string> m_onLogEmitted;
 
@@ -17,7 +18,7 @@ public class GenerateOfFullLogExportMono : MonoBehaviour
     {
         if (m_devicesSource == null)
         {
-            m_devicesSource = FindObjectOfType<ListOfAllDeviceAsIdBoolFloatMono>();
+            m_devicesSource = FindObjectOfType<HidMono_ListenToAllDevicesInUnity>();
         }
         if (m_devicesSource == null)
         {

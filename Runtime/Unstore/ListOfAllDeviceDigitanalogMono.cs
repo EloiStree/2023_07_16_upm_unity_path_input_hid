@@ -6,17 +6,20 @@ using UnityEngine.Events;
 
 public class ListOfAllDeviceDigitanalogMono : MonoBehaviour
 {
-    public ListOfAllDeviceAsIdBoolFloatMono m_source;
+    public HidMono_ListenToAllDevicesInUnity m_source;
     [TextArea(0,20)]
     public string m_debugText;
     public StringEvent m_onNewDebugText;
+
+    public bool m_useUpdate=true;
 
     [System.Serializable]
     public class StringEvent : UnityEvent<string> { }
 
     public void Update()
     {
-        Refresh();
+        if (m_useUpdate)
+            Refresh();
     }
 
     public bool ignoreMouseAndKeyboard;

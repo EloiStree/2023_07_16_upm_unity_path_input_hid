@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class UI_RawInputDeviceDropdownMono : MonoBehaviour
 {
-    public ListOfAllDeviceAsIdBoolFloatMono m_source;
+    public HidMono_ListenToAllDevicesInUnity m_source;
     public DeviceSourceRawEvent m_onDeviceSelected;
 
     public int m_index;

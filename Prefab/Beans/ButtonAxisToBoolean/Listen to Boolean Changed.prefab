@@ -1,0 +1,226 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3016050150039623457
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5477665567729730061}
+  - component: {fileID: 3066369500903222719}
+  m_Layer: 0
+  m_Name: Change Button To Named Boolean
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5477665567729730061
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3016050150039623457}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.8141245, y: 2.1970453, z: 2.7567408}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5592604286714038315}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3066369500903222719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3016050150039623457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e72fe242cb81a841ad6854a2554ce24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_overwatchValue: {fileID: 0}
+  m_currentDeviceState: {fileID: 0}
+  m_useDebugLog: 1
+  m_onBooleanChangedDetected:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: SleepyExperimentBooleanToSendMono, Assembly-CSharp
+        m_MethodName: PushBoolean
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_history:
+    m_historySize: 10
+    m_history:
+    - m_boolean: 
+      m_newValue: 0
+--- !u!1 &4604368315015867726
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5592604286714038315}
+  - component: {fileID: 5298347318699010419}
+  m_Layer: 0
+  m_Name: Listen to Boolean Changed
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5592604286714038315
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4604368315015867726}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5477665567729730061}
+  - {fileID: 4529102113458149457}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5298347318699010419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4604368315015867726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4adb1585af00a2e4a9f7c84c0b443467, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_sourceObservered: {fileID: 0}
+  m_debugSpammerList: []
+  m_onButtonChanged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3066369500903222719}
+        m_TargetAssemblyTypeName: HIDObserverOverwatchChangeToBooleanEventMono, be.eloistree.inputsystemtobool
+        m_MethodName: NotificationOfButtonChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_onButtonIsConsiderAsSpam:
+    m_PersistentCalls:
+      m_Calls: []
+  m_received: 0
+  m_relayed: 0
+  m_lastReceived:
+    m_deviceInfo:
+      m_displayName: 
+      m_unityId: 0
+      m_productName: 
+      m_manufacturer: 
+      m_interfacename: 
+      m_capabilities: 
+      m_deviceClass: 
+      m_isSupported: 0
+      m_devicePath: 
+      m_booleanValue: []
+      m_axisValue: []
+    m_booleanThatChanged:
+      m_givenIdName: 
+      m_value: 0
+      m_uniqueId: 3499bf13-fc93-428a-b7e7-3f91acb97d75
+    m_newValue: 0
+  m_buttonUniqueId: []
+  m_history:
+    m_historySize: 10
+    m_history: []
+  m_maxToken: 100
+--- !u!1 &8872037351118082226
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4529102113458149457}
+  - component: {fileID: 5028769111945232214}
+  m_Layer: 0
+  m_Name: Change Axis To Named Boolean
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4529102113458149457
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8872037351118082226}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5592604286714038315}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5028769111945232214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8872037351118082226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19db12727d928a44b7784caa90cb753, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_developerNote: It can skip state change when linked to Update use Thread if possible.
+  m_observer: {fileID: 0}
+  m_sourceObservered: {fileID: 0}
+  m_useUpdateToCheckChange: 1
+  m_onAxisObserverStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_onBooleanNamedChanged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: SleepyExperimentBooleanToSendMono, be.eloistree.inputsystemtobool
+        m_MethodName: PushBoolean
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

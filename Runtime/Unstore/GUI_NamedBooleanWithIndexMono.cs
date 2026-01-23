@@ -15,7 +15,7 @@ public class GUI_NamedBooleanWithIndexMono : MonoBehaviour
 
     public UnityEvent<int> m_onIndex;
     public UnityEvent<string> m_onLabel;
-    public PrimitiveUnityEventExtra_Bool m_onIsTrue;
+    public OnOffBoolenUnityEvent m_onIsTrue;
     public UnityEvent<bool> m_onDisplay;
     // Start is called before the first frame update
 
@@ -45,7 +45,7 @@ public class GUI_NamedBooleanWithIndexMono : MonoBehaviour
     }
 }
 [System.Serializable]
-public class PrimitiveUnityEventExtra_Bool
+public class OnOffBoolenUnityEvent
 {
 
     public UnityEvent<bool> m_valueEvent;

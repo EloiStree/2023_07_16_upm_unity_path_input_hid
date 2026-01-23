@@ -101,7 +101,7 @@ public class BooleanChangeObserver
 public class TempInputReadToBlueToothDemoMono : MonoBehaviour
 {
 
-    public ListOfAllDeviceAsIdBoolFloatMono m_source;
+    public HidMono_ListenToAllDevicesInUnity m_source;
 
 public string m_idMenuLeft ="/XboxOneGamepadAndroid|>select";
 public string m_idMenuRight ="/XboxOneGamepadAndroid|>start";
