@@ -5,6 +5,7 @@ using System.Linq;
 using Eloi.HID;
 using UnityEngine;
 using UnityEngine.Events;
+using static UnityEngine.InputSystem.LowLevel.InputEventTrace;
 
 public class HidMono_ListenToAllDevicesButtonChanged : MonoBehaviour
 {
@@ -133,6 +134,11 @@ public class HIDButtonChangedReference
         m_deviceInfo = deviceInfo;
         m_booleanThatChanged = booleanThatChanged;
     }
+    public string GetPathID() {
+
+        return HIDButtonStatic.GetID(in m_deviceInfo, in m_booleanThatChanged);
+    }
+
 }
 
 
@@ -152,6 +158,12 @@ public class HIDAxisChangedReference
         m_uniqueId = HIDButtonStatic.GetID(in deviceInfo, in axisThatChanged);
         m_deviceInfo = deviceInfo;
         m_axisThatChanged = axisThatChanged;
+    }
+
+    public string GetPathID()
+    {
+
+        return HIDButtonStatic.GetID(in m_deviceInfo, in m_axisThatChanged);
     }
 }
 

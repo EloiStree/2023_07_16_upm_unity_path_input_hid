@@ -10,6 +10,7 @@ using UnityEngine.InputSystem.HID;
 using UnityEngine.InputSystem.Layouts;
 using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.InputSystem.Utilities;
+using static UnityEngine.InputSystem.LowLevel.InputEventTrace;
 public class HidMono_ListenToAllDevicesInUnity : MonoBehaviour
 {
     public List<string> m_devicesName;
@@ -17,6 +18,8 @@ public class HidMono_ListenToAllDevicesInUnity : MonoBehaviour
 
 
     public NamedBooleanDeviceChanged m_onBooleanChanged;
+    public NamedAxisDeviceChanged m_onAxisChanged;
+
 
     void Start()
     {
@@ -363,6 +366,7 @@ public class HidMono_ListenToAllDevicesInUnity : MonoBehaviour
 
 
     public List<string> m_unsupportedType= new List<string>();
+
     private void Update()
     {
         Refresh();
@@ -479,6 +483,7 @@ public class HidMono_ListenToAllDevicesInUnity : MonoBehaviour
 
         if (addToRegister) {
             a.AddBooleanListener(m_onBooleanChanged);
+            a.AddAxisListener(m_onAxisChanged);
             m_devicesId.Add(a);
         }
         return a;
@@ -532,6 +537,7 @@ public class HidMono_ListenToAllDevicesInUnity : MonoBehaviour
 }
 
 public delegate void NamedBooleanDeviceChanged(DeviceSourceToRawValue deviceInfo, DeviceSourceToRawValue.NamedBooleanValue booleanThatChanged, bool newValue);
+public delegate void NamedAxisDeviceChanged(DeviceSourceToRawValue deviceInfo, DeviceSourceToRawValue.NamedFloatValue booleanThatChanged, float newValue);
 
 
 [System.Serializable]
@@ -553,6 +559,7 @@ public class DeviceSourceToRawValue
     public List<NamedFloatValue> m_axisValue = new List<NamedFloatValue>();
 
     public NamedBooleanDeviceChanged m_onBooleanChanged;
+    public NamedAxisDeviceChanged m_onAxisChanged;
 
     public void AddBooleanListener(NamedBooleanDeviceChanged listener)
     {
@@ -563,6 +570,16 @@ public class DeviceSourceToRawValue
     public void RemoveBooleanListener(NamedBooleanDeviceChanged listener)
     {
         m_onBooleanChanged -= listener;
+    }
+
+    public void AddAxisListener(NamedAxisDeviceChanged listener)
+    {
+        m_onAxisChanged -= listener;
+        m_onAxisChanged += listener;
+    }
+    public void RemoveAxisListener(NamedAxisDeviceChanged listener)
+    {
+        m_onAxisChanged -= listener;
     }
 
     public void AddListener()
@@ -580,6 +597,7 @@ public class DeviceSourceToRawValue
             return;
 
         RefreshAllBooleanValue();
+        RefreshAllAxisValue();
     }
 
     private void RefreshAllBooleanValue()
@@ -594,6 +612,27 @@ public class DeviceSourceToRawValue
             
                if(m_onBooleanChanged!=null)
                    m_onBooleanChanged.Invoke(this, m_booleanValue[i], current);           
+            }
+        }
+    }
+
+    public void RefreshAllAxisValue()
+    {
+        for (int i = 0; i < m_axisValue.Count; i++)
+        {
+            float previous = m_axisValue[i].m_value;
+            // Read the current value from the InputControl
+            //Not Tested
+            if (m_axisValue[i].m_source is InputControl<float> axisControl)
+            {
+                float current = axisControl.ReadValue();
+                bool changed = previous != current;
+                m_axisValue[i].m_value = current;
+                if (changed)
+                {
+                    if (m_onAxisChanged != null)
+                        m_onAxisChanged.Invoke(this, m_axisValue[i], current);
+                }
             }
         }
     }
@@ -671,6 +710,7 @@ public class DeviceSourceToRawValue
     public class NamedFloatValue : InputControlNamedValue
     {
         public float m_value;
+       
     }
 
     public void PushOut(string name, bool isTrue)
@@ -713,10 +753,19 @@ public class DeviceSourceToRawValue
                 m_value = axisValue
             };
             m_axisValue.Add(nb);
+
+            if (m_onAxisChanged != null)
+                m_onAxisChanged.Invoke(this, container, axisValue);
         }
         else
         {
+            float previous  = container.m_value;
             container.m_value = axisValue;
+            if (previous != axisValue)
+            {
+                if (m_onAxisChanged != null)
+                    m_onAxisChanged.Invoke(this, container, axisValue);
+            }
         }
     }
 }
